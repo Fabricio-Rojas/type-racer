@@ -56,4 +56,19 @@ const wordist = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot',
 'awesome', 'challenge', 'science', 'mystery', 'famous', 'league', 'memory', 
 'leather', 'planet', 'software', 'update', 'yellow', 'keyboard', 'window'];
 
-const harderWords = ['Alphabetization', 'Accomplishments', 'Acknowledgeable', 'Blameworthiness', 'Bibliographical', 'Bacteriological', 'Characteristics', 'Congratulations', 'Confidentiality', 'Desertification', 'Disorganization', 'Diversification', 'Excommunication', 'Experimentation', 'Electrification', 'Familiarization', 'Faithworthiness', 'Featurelessness', 'Gentlemanliness', 'Grandmotherhood', 'Gravitationally', 'Housebrokenness', 'Hypercorrection', 'Hypercorrection', 'Interdependence', 'Instrumentation', 'Insubordination', 'Kindheartedness', 'Kinesthetically', 'Kaleidoscopical', 'Lightheadedness', 'Lackadaisically', 'Lexicographical', 'Misappreciation', 'Marginalization', 'Materialization', 'Nationalization', 'Neurobiological', 'Noninterruption', 'Overcalculation', 'Oversensitivity', 'Oversufficiency', 'Procrastinating', 'Prenotification', 'Physiologically', 'Responsibleness', 'Reapportionment', 'Redetermination', 'Straightforward', 'Sententiousness', 'Supernaturalism', 'Thermochemistry', 'Trustworthiness', 'Transplantation', 'Unconditionally', 'Underproduction', 'Unqualification', 'Vascularization', 'Vasoconstrictor', 'Vasovesiculitis', 'Weatherboarding', 'Wrongheadedness', 'Warrantableness']
+const harderWords = ['alphabetization', 'accomplishments', 'acknowledgeable', 
+'blameworthiness', 'bibliographical', 'bacteriological', 'characteristics', 
+'congratulations', 'confidentiality', 'desertification', 'disorganization', 
+'diversification', 'excommunication', 'experimentation', 'electrification', 
+'familiarization', 'faithworthiness', 'featurelessness', 'gentlemanliness', 
+'grandmotherhood', 'gravitationally', 'housebrokenness', 'hypercorrection', 
+'hypercorrection', 'interdependence', 'instrumentation', 'insubordination', 
+'kindheartedness', 'kinesthetically', 'kaleidoscopical', 'lightheadedness', 
+'lackadaisically', 'lexicographical', 'misappreciation', 'marginalization', 
+'materialization', 'nationalization', 'neurobiological', 'noninterruption', 
+'overcalculation', 'oversensitivity', 'oversufficiency', 'procrastinating', 
+'prenotification', 'physiologically', 'responsibleness', 'reapportionment', 
+'redetermination', 'straightforward', 'sententiousness', 'supernaturalism', 
+'thermochemistry', 'trustworthiness', 'transplantation', 'unconditionally', 
+'underproduction', 'unqualification', 'vascularization', 'vasoconstrictor', 
+'vasovesiculitis', 'weatherboarding', 'wrongheadedness', 'warrantableness']
