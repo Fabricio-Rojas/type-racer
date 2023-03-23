@@ -1,0 +1,12 @@
+@import "./reset.css";
+
+/* Body and Main elements */
+.container {
+    width: min(100% - 30px, 1280px);
+    margin-inline: auto;
+}
+
+body {
+    background-color: #1a1d28;
+}
+
