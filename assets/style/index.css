@@ -8,5 +8,101 @@
 
 body {
     background-color: #1a1d28;
+    padding-bottom: 20px;
 }
 
+/* Header */
+
+header {
+    background-color: #494b57;
+    height: 90px;
+}
+
+h2 {
+    color: #fff;
+    text-align: center;
+    line-height: 90px;
+    font-size: 35px;
+}
+
+/* Main */
+
+main {
+    height: calc(100vh - 90px);
+    color: #fff;
+}
+
+.timer {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.curr-word {
+    text-align: center;
+    font-size: 55px;
+    font-weight: 700;
+}
+
+.txt-input {
+    display: flex;
+    justify-content: center;
+}
+
+#txt-input {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    height: 40px;
+    width: 420px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+#txt-input:focus {
+    border: 1px solid #5adbff;
+}
+
+.start-reset {
+    display: flex;
+    justify-content: center;
+}
+
+#start-reset {
+    text-align: center;
+    height: 40px;
+    width: 100px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #009D5D;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#start-reset:active {
+    border: 1px solid #000;
+}
+
+.curr-score {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.high-score {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.instructions {
+    background-color: #494b57;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 540px;
+    margin: 0 auto;
+}
