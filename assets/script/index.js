@@ -39,9 +39,13 @@ class Score {
 // Main function
 let seconds = 99;
 let countdown;
+let score = 0;
 let hiScore = 0;
 let hiRScore = 0;
 let scrPercentage;
+let hardModeOn = false;
+let intervalActive = false;
+let wordCopy;
 
 function startInterval() {
     countdown = setInterval(function() {
@@ -88,9 +92,6 @@ function resetInterval() {
     startInterval();
 }
 
-let hardModeOn = false;
-let intervalActive = false;
-let wordCopy;
 
 reStartBtn.addEventListener('click', function() {
     BgMusic.play();
@@ -104,11 +105,14 @@ reStartBtn.addEventListener('click', function() {
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
     currentWord.innerText = wordCopy[randWord];
     wordCopy.splice(randWord, 1);
+
     reStartBtn.innerText = 'Reset';
     timer.innerText = `Time Left: 99`
     textInp.value = '';
+
     textInp.disabled = false;
     textInp.focus();
+
     hardModeOn = false;
 
     if (!intervalActive) {
@@ -120,7 +124,6 @@ reStartBtn.addEventListener('click', function() {
     }
 })
 
-let score = 0;
 textInp.addEventListener('keyup', function() {
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
     if (textInp.value === currentWord.innerText){
@@ -139,19 +142,21 @@ hardMode.addEventListener('click', function() {
 
     title.classList.add('hard-text');
     currentWord.classList.add('hard-text');
-
-    higherScore.style.display = 'block';
-    hardModeOn = true;
-
+    
     wordCopy = JSON.parse(JSON.stringify(harderWords));
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
     currentWord.innerText = wordCopy[randWord];
     wordCopy.splice(randWord, 1);
+    
     reStartBtn.innerText = 'Reset';
     timer.innerText = `Time Left: 99`
     textInp.value = '';
+    
     textInp.disabled = false;
     textInp.focus();
+
+    higherScore.style.display = 'block';
+    hardModeOn = true;
 
     if (!intervalActive) {
         startInterval();
