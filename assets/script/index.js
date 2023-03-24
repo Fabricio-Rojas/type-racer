@@ -2,13 +2,22 @@
 
 // Declaring Elements
 
+const title = document.querySelector('h2');
 const timer = document.querySelector('.timer');
 const currentWord = document.querySelector('.curr-word');
 const textInp = document.querySelector('#txt-input');
 const reStartBtn = document.querySelector('#start-reset');
+const hardMode = document.querySelector('#hard-mode');
 const currentScore = document.querySelector('.curr-score');
 const highScore = document.querySelector('.high-score');
 const higherScore = document.querySelector('.higher-score');
+
+const BgMusic = new Audio('./assets/audio/BgMusic.mp3');
+BgMusic.type = 'audio/mp3';
+BgMusic.volume = 0.4;
+const hardmodeMusic = new Audio('./assets/audio/Hardmode.mp3');
+hardmodeMusic.type = 'audio/mp3';
+hardmodeMusic.volume = 0.4;
 
 // Class Definition
 
@@ -28,34 +37,54 @@ class Score {
 }
 
 // Main function
-let seconds = 99;
+let seconds = 10;
 let countdown;
 let hiScore = 0;
+let hiRScore = 0;
+
 function startInterval() {
     countdown = setInterval(function() {
         seconds--;
         timer.innerText = `Time Left: ${seconds}`
         if (seconds === 0) {
+            BgMusic.pause();
+            hardmodeMusic.pause();
+            BgMusic.currentTime = 0;
+            hardmodeMusic.currentTime = 0;
+
             clearInterval(countdown);
             currentScore.innerText = `Score: 0`;
             textInp.disabled = true;
-            if (score > hiScore) {
+            if (score > hiScore && hardModeOn == false) {
                 hiScore = score;
                 highScore.innerText = `High Score: ${hiScore}`;
+            } else if (score > hiRScore && hardModeOn == true) {
+                hiRScore = score;
+                higherScore.innerText = `Higher Score: ${hiRScore}`;
             }
             score = 0;
+            hardMode.style.display = 'block';
         }
     }, 1000);
-}   
+}
 
 function resetInterval() {
     clearInterval(countdown);
     startInterval();
 }
 
+let hardModeOn = false;
 let intervalActive = false;
 let wordCopy;
+
 reStartBtn.addEventListener('click', function() {
+    BgMusic.play();
+    hardmodeMusic.pause();
+    hardmodeMusic.currentTime = 0;
+
+    title.classList.remove('hard-text');
+    currentWord.classList.remove('hard-text');
+
     wordCopy = JSON.parse(JSON.stringify(wordList));
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
     currentWord.innerText = wordCopy[randWord];
@@ -65,6 +94,7 @@ reStartBtn.addEventListener('click', function() {
     textInp.value = '';
     textInp.disabled = false;
     textInp.focus();
+    hardModeOn = false;
 
     if (!intervalActive) {
         startInterval();
@@ -84,6 +114,36 @@ textInp.addEventListener('keyup', function() {
         currentWord.innerText = wordCopy[randWord];
         wordCopy.splice(randWord, 1);
         textInp.value = '';
+    }
+})
+
+hardMode.addEventListener('click', function() {
+    hardmodeMusic.play();
+    BgMusic.pause();
+    BgMusic.currentTime = 0;
+
+    title.classList.add('hard-text');
+    currentWord.classList.add('hard-text');
+
+    higherScore.style.display = 'block';
+    hardModeOn = true;
+
+    wordCopy = JSON.parse(JSON.stringify(harderWords));
+    let randWord = Math.round((Math.random() * wordCopy.length) - 1);
+    currentWord.innerText = wordCopy[randWord];
+    wordCopy.splice(randWord, 1);
+    reStartBtn.innerText = 'Reset';
+    timer.innerText = `Time Left: 99`
+    textInp.value = '';
+    textInp.disabled = false;
+    textInp.focus();
+
+    if (!intervalActive) {
+        startInterval();
+        intervalActive = true;
+    } else {
+        seconds = 99;
+        resetInterval();
     }
 })
 

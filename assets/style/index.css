@@ -68,7 +68,7 @@ main {
     border: 1px solid #5adbff;
 }
 
-.start-reset {
+.start-buttons {
     margin-top: 30px;
     display: flex;
     justify-content: center;
@@ -77,8 +77,9 @@ main {
 #start-reset {
     text-align: center;
     height: 40px;
-    width: 100px;
+    width: 120px;
     padding: 5px 10px;
+    margin: 0 10px;
     border-radius: 5px;
     background-color: #009D5D;
     font-size: 17px;
@@ -86,7 +87,21 @@ main {
     cursor: pointer;
 }
 
-#start-reset:active {
+#hard-mode {
+    display: none;
+    text-align: center;
+    height: 40px;
+    width: 120px;
+    padding: 5px 10px;
+    margin: 0 10px;
+    border-radius: 5px;
+    background-color: #d00000;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:active {
     border: 1px solid #000;
 }
 
