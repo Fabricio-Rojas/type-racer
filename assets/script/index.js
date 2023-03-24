@@ -37,10 +37,11 @@ class Score {
 }
 
 // Main function
-let seconds = 10;
+let seconds = 99;
 let countdown;
 let hiScore = 0;
 let hiRScore = 0;
+let scrPercentage;
 
 function startInterval() {
     countdown = setInterval(function() {
@@ -55,14 +56,28 @@ function startInterval() {
             clearInterval(countdown);
             currentScore.innerText = `Score: 0`;
             textInp.disabled = true;
-            if (score > hiScore && hardModeOn == false) {
+
+            const date = new Date();
+            const options = {month: 'short', day: 'numeric', year: 'numeric'};
+            const formattedDate = date.toLocaleDateString('en-US', options);
+            
+            if (!hardModeOn) {
+                scrPercentage = ((score / wordList.length) * 100).toFixed(2);
+            } else if (hardModeOn) {
+                scrPercentage = ((score / harderWords.length) * 100).toFixed(2);
+            }
+
+            if (score > hiScore && !hardModeOn) {
                 hiScore = score;
-                highScore.innerText = `High Score: ${hiScore}`;
-            } else if (score > hiRScore && hardModeOn == true) {
+                const newScore = new Score(formattedDate, hiScore, scrPercentage)
+                highScore.innerText = `High Score: ${newScore.score} points, ${newScore.percentage}%, on ${newScore.date}`;
+            } else if (score > hiRScore && hardModeOn) {
                 hiRScore = score;
-                higherScore.innerText = `Higher Score: ${hiRScore}`;
+                const newScore = new Score(formattedDate, hiRScore, scrPercentage)
+                higherScore.innerText = `Higher Score: ${newScore.score} points, ${newScore.percentage}%, on ${newScore.date}`;
             }
             score = 0;
+
             hardMode.style.display = 'block';
         }
     }, 1000);
