@@ -18,6 +18,9 @@ BgMusic.volume = 0.4;
 const hardmodeMusic = new Audio('./assets/audio/Hardmode.mp3');
 hardmodeMusic.type = 'audio/mp3';
 hardmodeMusic.volume = 0.4;
+const correctSound = new Audio('./assets/audio/correct.mp3');
+correctSound.type = 'audio/mp3';
+correctSound.volume = 0.3;
 
 // Class Definition
 
@@ -46,6 +49,8 @@ let scrPercentage;
 let hardModeOn = false;
 let intervalActive = false;
 let wordCopy;
+
+textInp.disabled = true;
 
 function startInterval() {
     countdown = setInterval(function() {
@@ -92,7 +97,6 @@ function resetInterval() {
     startInterval();
 }
 
-
 reStartBtn.addEventListener('click', function() {
     BgMusic.play();
     hardmodeMusic.pause();
@@ -124,9 +128,10 @@ reStartBtn.addEventListener('click', function() {
     }
 })
 
-textInp.addEventListener('keyup', function() {
+textInp.addEventListener('input', function() {
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
     if (textInp.value === currentWord.innerText){
+        correctSound.play()
         score++;
         currentScore.innerText = `Score: ${score}`;
         currentWord.innerText = wordCopy[randWord];
