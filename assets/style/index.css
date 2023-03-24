@@ -91,14 +91,14 @@ main {
 }
 
 .curr-score {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     font-weight: 700;
     font-size: 30px;
 }
 
 .high-score {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     font-weight: 700;
     font-size: 30px;
@@ -106,7 +106,7 @@ main {
 
 .higher-score {
     display: none;
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     font-weight: 700;
     font-size: 30px;

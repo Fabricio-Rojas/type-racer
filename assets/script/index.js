@@ -28,20 +28,67 @@ class Score {
 }
 
 // Main function
+let seconds = 99;
+let countdown;
+let hiScore = 0;
+function startInterval() {
+    countdown = setInterval(function() {
+        seconds--;
+        timer.innerText = `Time Left: ${seconds}`
+        if (seconds === 0) {
+            clearInterval(countdown);
+            currentScore.innerText = `Score: 0`;
+            textInp.disabled = true;
+            if (score > hiScore) {
+                hiScore = score;
+                highScore.innerText = `High Score: ${hiScore}`;
+            }
+            score = 0;
+        }
+    }, 1000);
+}   
 
+function resetInterval() {
+    clearInterval(countdown);
+    startInterval();
+}
+
+let intervalActive = false;
+let wordCopy;
 reStartBtn.addEventListener('click', function() {
+    wordCopy = JSON.parse(JSON.stringify(wordList));
+    let randWord = Math.round((Math.random() * wordCopy.length) - 1);
+    currentWord.innerText = wordCopy[randWord];
+    wordCopy.splice(randWord, 1);
+    reStartBtn.innerText = 'Reset';
+    timer.innerText = `Time Left: 99`
+    textInp.value = '';
+    textInp.disabled = false;
+    textInp.focus();
 
+    if (!intervalActive) {
+        startInterval();
+        intervalActive = true;
+    } else {
+        seconds = 99;
+        resetInterval();
+    }
 })
 
 let score = 0;
 textInp.addEventListener('keyup', function() {
+    let randWord = Math.round((Math.random() * wordCopy.length) - 1);
     if (textInp.value === currentWord.innerText){
         score++;
-        console.log(score)
+        currentScore.innerText = `Score: ${score}`;
+        currentWord.innerText = wordCopy[randWord];
+        wordCopy.splice(randWord, 1);
+        textInp.value = '';
     }
 })
 
-const wordist = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot', 
+// Word arrays
+const wordList = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot', 
 'building', 'population','weather', 'bottle', 'history', 'dream', 'character', 
 'money', 'absolute', 'discipline', 'machine', 'accurate', 'connection', 
 'rainbow', 'bicycle', 'eclipse', 'calculator', 'trouble', 'watermelon', 
