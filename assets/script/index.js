@@ -98,6 +98,7 @@ function resetInterval() {
 }
 
 reStartBtn.addEventListener('click', function() {
+    BgMusic.currentTime = 0;
     BgMusic.play();
     hardmodeMusic.pause();
     hardmodeMusic.currentTime = 0;
@@ -146,6 +147,7 @@ textInp.addEventListener('input', function() {
 })
 
 hardMode.addEventListener('click', function() {
+    hardmodeMusic.currentTime = 0;
     hardmodeMusic.play();
     BgMusic.pause();
     BgMusic.currentTime = 0;
