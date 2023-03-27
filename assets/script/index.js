@@ -137,6 +137,10 @@ textInp.addEventListener('input', function() {
         currentWord.innerText = wordCopy[randWord];
         wordCopy.splice(randWord, 1);
         textInp.value = '';
+        setTimeout(function() {
+            correctSound.pause();
+            correctSound.currentTime = 0;
+        }, 1000);
     }
 })
 
