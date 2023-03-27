@@ -113,6 +113,7 @@ reStartBtn.addEventListener('click', function() {
     reStartBtn.innerText = 'Reset';
     timer.innerText = `Time Left: 99`
     textInp.value = '';
+    currentScore.innerText = '';
 
     textInp.disabled = false;
     textInp.focus();
