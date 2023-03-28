@@ -2,6 +2,8 @@
 
 // Declaring Elements
 
+const body = document.querySelector('body');
+const dialog = document.querySelector('dialog');
 const title = document.querySelector('h2');
 const timer = document.querySelector('.timer');
 const currentWord = document.querySelector('.curr-word');
@@ -55,7 +57,7 @@ textInp.disabled = true;
 function startInterval() {
     countdown = setInterval(function() {
         seconds--;
-        timer.innerText = `Time Left: ${seconds}`
+        timer.innerHTML = `<i class="fa-solid fa-clock"></i> Time Left: ${seconds}`
         if (seconds === 0) {
             BgMusic.pause();
             hardmodeMusic.pause();
@@ -63,7 +65,7 @@ function startInterval() {
             hardmodeMusic.currentTime = 0;
 
             clearInterval(countdown);
-            currentScore.innerText = `Score: 0`;
+            currentScore.innerHTML = `<i class="fa-solid fa-star"></i> Score: 0`;
             textInp.disabled = true;
 
             const date = new Date();
@@ -79,11 +81,11 @@ function startInterval() {
             if (score > hiScore && !hardModeOn) {
                 hiScore = score;
                 const newScore = new Score(formattedDate, hiScore, scrPercentage)
-                highScore.innerText = `High Score: ${newScore.score} points, ${newScore.percentage}%, on ${newScore.date}`;
+                highScore.innerHTML = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> High Score: ${newScore.score} points, ${newScore.percentage}%, on ${newScore.date}`;
             } else if (score > hiRScore && hardModeOn) {
                 hiRScore = score;
                 const newScore = new Score(formattedDate, hiRScore, scrPercentage)
-                higherScore.innerText = `Higher Score: ${newScore.score} points, ${newScore.percentage}%, on ${newScore.date}`;
+                higherScore.innerHTML = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Higher Score: ${newScore.score} points, ${newScore.percentage}%, on ${newScore.date}`;
             }
             score = 0;
 
@@ -105,16 +107,16 @@ reStartBtn.addEventListener('click', function() {
 
     title.classList.remove('hard-text');
     currentWord.classList.remove('hard-text');
+    body.style.backgroundImage = 'url("./assets/image/gameBG.jpg")';
 
     wordCopy = JSON.parse(JSON.stringify(wordList));
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
     currentWord.innerText = wordCopy[randWord];
     wordCopy.splice(randWord, 1);
 
-    reStartBtn.innerText = 'Reset';
-    timer.innerText = `Time Left: 99`
+    reStartBtn.innerText = 'Restart';
+    timer.innerHTML = `<i class="fa-solid fa-clock"></i> Time Left: 99`
     textInp.value = '';
-    currentScore.innerText = '';
 
     textInp.disabled = false;
     textInp.focus();
@@ -135,7 +137,7 @@ textInp.addEventListener('input', function() {
     if (textInp.value === currentWord.innerText){
         correctSound.play()
         score++;
-        currentScore.innerText = `Score: ${score}`;
+        currentScore.innerHTML = `<i class="fa-solid fa-star"></i> Score: ${score}`;
         currentWord.innerText = wordCopy[randWord];
         wordCopy.splice(randWord, 1);
         textInp.value = '';
@@ -154,14 +156,15 @@ hardMode.addEventListener('click', function() {
 
     title.classList.add('hard-text');
     currentWord.classList.add('hard-text');
+    body.style.backgroundImage = 'url("./assets/image/gameBGneg.jpg")';
     
     wordCopy = JSON.parse(JSON.stringify(harderWords));
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
     currentWord.innerText = wordCopy[randWord];
     wordCopy.splice(randWord, 1);
     
-    reStartBtn.innerText = 'Reset';
-    timer.innerText = `Time Left: 99`
+    reStartBtn.innerText = 'Restart';
+    timer.innerHTML = `<i class="fa-solid fa-clock"></i> Time Left: 99`
     textInp.value = '';
     
     textInp.disabled = false;
@@ -177,6 +180,10 @@ hardMode.addEventListener('click', function() {
         seconds = 99;
         resetInterval();
     }
+})
+
+body.addEventListener('click', function() {
+    dialog.close()
 })
 
 // Word arrays

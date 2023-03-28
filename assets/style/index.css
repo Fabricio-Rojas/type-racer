@@ -7,33 +7,53 @@
 }
 
 body {
-    background-color: #1a1d28;
+    background-image: url("../image/gameBG.jpg");
+    background-size: cover;
     padding-bottom: 20px;
 }
 
-/* Header */
+/* Dialog */
 
-header {
-    background-color: #494b57;
-    height: 70px;
+dialog {
+    color: #fff;
+    text-align: center;
+    width: 710px;
+    height: 550px;
+    margin: 30px auto 0;
+    padding: 50px 40px 100px;
+    border-radius: 50px;
+    font-size: 25px;
+    background-color: transparent;
+    background: linear-gradient(315deg, #D61092, #271092);
 }
+
+dialog h3 {
+    margin: 50px 0 30px;
+    font-weight: 800;
+}
+
+dialog p {
+    font-weight: bolder;
+}
+
+/* Header */
 
 h2 {
     color: #fff;
     text-align: center;
     line-height: 70px;
-    font-size: 35px;
+    font-size: 40px;
 }
 
 /* Main */
 
 main {
-    height: calc(100vh - 90px);
+    height: calc(100vh - 170px);
     color: #fff;
 }
 
 .timer {
-    margin-top: 20px;
+    margin-top: 100px;
     text-align: center;
     font-weight: 700;
     font-size: 30px;
@@ -44,6 +64,7 @@ main {
     text-align: center;
     font-size: 55px;
     font-weight: 700;
+    user-select: none;
 }
 
 .txt-input {
@@ -60,7 +81,7 @@ main {
     width: 420px;
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 

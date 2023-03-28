@@ -8,6 +8,7 @@
         <meta name="keywords" content="html, css, web, web development, seo">
         <title>SpeedTyper ULTRA</title>
         <link rel="shortcut icon" href="./assets/image/main white finished.png?v=2" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
         <link rel="stylesheet" href="./assets/style/index.css" media="all">
         <script src="./assets/script/index.js" defer></script>
     </head>
@@ -15,38 +16,44 @@
         <header>
             <h2>SpeedTyper ULTRA</h2>
         </header>
+        <dialog open>
+            click anywhere to close
+            <h3>Instructions</h3>
+            <p>
+                Type as many words as you can within the time limit.
+            </p>
+            <p>
+                To play again, just press the button.
+            </p>
+            <p>
+                When you finish the game, your highest score will be saved.
+            </p>
+            <p>
+                When you finish the game for the first time, you will unlock a special hard mode.
+            </p>
+        </dialog>
         <main class="container">
             <div class="timer">
-                Time Left: 99
+                <i class="fa-solid fa-clock"></i> Time Left: --
             </div>
             <div class="curr-word">
-                
+
             </div>
             <div class="txt-input">
                 <input type="text" name="txt-input" id="txt-input" placeholder="Start Typing...">
             </div>
+            <div class="curr-score">
+                <i class="fa-solid fa-star"></i> Score: -
+            </div>
+            <div class="high-score">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> High Score: -
+            </div>
+            <div class="higher-score">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Higher Score: -
+            </div>
             <div class="start-buttons">
                 <button id="start-reset">Start</button>
                 <button id="hard-mode">Hard Mode</button>
-            </div>
-            <div class="curr-score">
-                Score: 0
-            </div>
-            <div class="high-score">
-                High Score: 0
-            </div>
-            <div class="higher-score">
-                Higher Score: 0
-            </div>
-            <div class="instructions">
-                <h3>Instructions</h3>
-                <p>
-                    Type as many words as you can within the time limit.
-                    To play again, just press the button.
-                    When you finish the game, your highest score will be saved.
-                    When you finish the game for the first time, you will unlock
-                    a special hard mode.
-                </p>
             </div>
         </main>
     </body>
