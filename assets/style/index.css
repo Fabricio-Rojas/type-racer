@@ -161,37 +161,37 @@ button:active {
 
 @keyframes rainbow {
     0% { color: #ff0000; 
-        filter: hue-rotate(0deg) invert(0) saturate(1);
+        filter: hue-rotate(0deg) invert(0) saturate(1) blur(0px);
     }
     10% { color: #ff4000; 
-        filter: hue-rotate(36deg) invert(1) saturate(2);
+        filter: hue-rotate(36deg) invert(1) saturate(2) blur(1px);
     }
     20% { color: #ff8000; 
-        filter: hue-rotate(72deg) invert(0) saturate(3);
+        filter: hue-rotate(72deg) invert(0) saturate(3) blur(2px);
     }
     30% { color: #ffbf00; 
-        filter: hue-rotate(108deg) invert(1) saturate(4);
+        filter: hue-rotate(108deg) invert(1) saturate(4) blur(3px);
     }
     40% { color: #ffff00; 
-        filter: hue-rotate(144deg) invert(0) saturate(5);
+        filter: hue-rotate(144deg) invert(0) saturate(5) blur(4px);
     }
     50% { color: #80ff00; 
-        filter: hue-rotate(180deg) invert(1) saturate(6);
+        filter: hue-rotate(180deg) invert(1) saturate(6) blur(5px);
     }
     60% { color: #00ff00; 
-        filter: hue-rotate(216deg) invert(0) saturate(5);
+        filter: hue-rotate(216deg) invert(0) saturate(5) blur(4px);
     }
     70% { color: #00ff80; 
-        filter: hue-rotate(252deg) invert(1) saturate(4);
+        filter: hue-rotate(252deg) invert(1) saturate(4) blur(3px);
     }
     80% { color: #00ffff; 
-        filter: hue-rotate(288deg) invert(0) saturate(3);
+        filter: hue-rotate(288deg) invert(0) saturate(3) blur(2px);
     }
     90% { color: #0080ff; 
-        filter: hue-rotate(324deg) invert(1) saturate(2);
+        filter: hue-rotate(324deg) invert(1) saturate(2) blur(1px);
     }
     100% { color: #8000ff; 
-        filter: hue-rotate(360deg) invert(0) saturate(1);
+        filter: hue-rotate(360deg) invert(0) saturate(1) blur(0px);
     }
 }
 
