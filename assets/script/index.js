@@ -3,17 +3,18 @@
 // Declaring Elements
 
 const body = document.querySelector('body');
-const dialog = document.querySelector('dialog');
+const instructionDlg = document.querySelector('#instructions-dlg');
 const title = document.querySelector('h2');
 const timer = document.querySelector('.timer');
-const currentWord = document.querySelector('.curr-word');
+const currentWordDisplayed = document.querySelector('.curr-word');
 const textInp = document.querySelector('#txt-input');
 const reStartBtn = document.querySelector('#start-reset');
-const hardMode = document.querySelector('#hard-mode');
-const currentScore = document.querySelector('.curr-score');
+const hardModeBtn = document.querySelector('#hard-mode');
+const currentScoreText = document.querySelector('.curr-score');
 const highScore = document.querySelector('.high-score');
 const higherScore = document.querySelector('.higher-score');
 
+// Audio
 const BgMusic = new Audio('./assets/audio/BgMusic.mp3');
 BgMusic.type = 'audio/mp3';
 BgMusic.volume = 0.4;
@@ -25,7 +26,6 @@ correctSound.type = 'audio/mp3';
 correctSound.volume = 0.3;
 
 // Class Definition
-
 class Score {
     #date;
     #score;
@@ -41,8 +41,10 @@ class Score {
     get percentage() {return this.#percentage}
 }
 
-// Main function
-let seconds = 99;
+/**
+ * seconds: 
+ */
+let seconds = 99; // Modify to test
 let countdown;
 let score = 0;
 let hiScore = 0;
@@ -54,6 +56,17 @@ let wordCopy;
 
 textInp.disabled = true;
 
+/*------------------- Main Function -------------------*/
+// Delay dialog opening for style
+setTimeout(() => {
+    console.log('opening')
+    instructionDlg.showModal();
+}, 500);
+
+// Start an interval that counts down every second for x amount of seconds,
+// when seconds reach 0, stop the game, get the date, percentage of hits, and 
+// set the highscore in the respective modes highscore display, resets the 
+// score and reveals the hardmode button
 function startInterval() {
     countdown = setInterval(function() {
         seconds--;
@@ -65,7 +78,7 @@ function startInterval() {
             hardmodeMusic.currentTime = 0;
 
             clearInterval(countdown);
-            currentScore.innerHTML = `<i class="fa-solid fa-star"></i> Score: 0`;
+            currentScoreText.innerHTML = `<i class="fa-solid fa-star"></i> Score: 0`;
             textInp.disabled = true;
 
             const date = new Date();
@@ -89,16 +102,22 @@ function startInterval() {
             }
             score = 0;
 
-            hardMode.style.display = 'block';
+            hardModeBtn.style.display = 'block';
         }
     }, 1000);
 }
 
+// Stops and starts the timer interval when needed
 function resetInterval() {
     clearInterval(countdown);
     startInterval();
 }
 
+// When start button pressed, stops any music and plays regular modes music
+// removes any hardmode styling, and creates a copy of the regular word list
+// and starts the game by getting a random word, displaying, and removing it.
+// restarts the time and clears and focuses in the text input, turns off
+// hardmode and start the counting interval
 reStartBtn.addEventListener('click', function() {
     BgMusic.currentTime = 0;
     BgMusic.play();
@@ -106,12 +125,12 @@ reStartBtn.addEventListener('click', function() {
     hardmodeMusic.currentTime = 0;
 
     title.classList.remove('hard-text');
-    currentWord.classList.remove('hard-text');
+    currentWordDisplayed.classList.remove('hard-text');
     body.style.backgroundImage = 'url("./assets/image/gameBG.jpg")';
 
     wordCopy = JSON.parse(JSON.stringify(wordList));
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
-    currentWord.innerText = wordCopy[randWord];
+    currentWordDisplayed.innerText = wordCopy[randWord];
     wordCopy.splice(randWord, 1);
 
     reStartBtn.innerText = 'Restart';
@@ -132,13 +151,18 @@ reStartBtn.addEventListener('click', function() {
     }
 })
 
+// Activates every time you change the inputs value, gets a random word from
+// the list copy, and when the inputed word is the same as the displayed word.
+// adds a point to the score, displays it, and displays and removes the new 
+// random word from the copy list as to not repeat it, clears the input value,
+// and limits the correct sound play time
 textInp.addEventListener('input', function() {
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
-    if (textInp.value === currentWord.innerText){
+    if (textInp.value === currentWordDisplayed.innerText){
         correctSound.play()
         score++;
-        currentScore.innerHTML = `<i class="fa-solid fa-star"></i> Score: ${score}`;
-        currentWord.innerText = wordCopy[randWord];
+        currentScoreText.innerHTML = `<i class="fa-solid fa-star"></i> Score: ${score}`;
+        currentWordDisplayed.innerText = wordCopy[randWord];
         wordCopy.splice(randWord, 1);
         textInp.value = '';
         setTimeout(function() {
@@ -148,19 +172,22 @@ textInp.addEventListener('input', function() {
     }
 })
 
-hardMode.addEventListener('click', function() {
+// Start a round in HardMode, applying hardmode styles, creates a copy of the
+// hardmode word list, and gets & displays it same as on normal mode, rest of
+// functionality is the same as normal button
+hardModeBtn.addEventListener('click', function() {
     hardmodeMusic.currentTime = 0;
     hardmodeMusic.play();
     BgMusic.pause();
     BgMusic.currentTime = 0;
 
     title.classList.add('hard-text');
-    currentWord.classList.add('hard-text');
+    currentWordDisplayed.classList.add('hard-text');
     body.style.backgroundImage = 'url("./assets/image/gameBGneg.jpg")';
     
     wordCopy = JSON.parse(JSON.stringify(harderWords));
     let randWord = Math.round((Math.random() * wordCopy.length) - 1);
-    currentWord.innerText = wordCopy[randWord];
+    currentWordDisplayed.innerText = wordCopy[randWord];
     wordCopy.splice(randWord, 1);
     
     reStartBtn.innerText = 'Restart';
@@ -182,8 +209,9 @@ hardMode.addEventListener('click', function() {
     }
 })
 
+// Instruction Dialog closing function
 body.addEventListener('click', function() {
-    dialog.close()
+    instructionDlg.close()
 })
 
 // Word arrays

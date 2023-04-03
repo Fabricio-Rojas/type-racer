@@ -14,10 +14,7 @@
         <script src="./assets/script/index.js" defer></script>
     </head>
     <body>
-        <header>
-            <h2>SpeedTyper ULTRA</h2>
-        </header>
-        <dialog open>
+        <dialog id="instructions-dlg">
             click anywhere to close
             <h3>Instructions</h3>
             <p>
@@ -33,6 +30,15 @@
                 When you finish the game for the first time, you will unlock a special hard mode.
             </p>
         </dialog>
+        <dialog id="high-score-dlg">
+
+        </dialog>
+        <dialog id="higher-score-dlg">
+
+        </dialog>
+        <header>
+            <h2>SpeedTyper ULTRA</h2>
+        </header>
         <main class="container">
             <div class="timer">
                 <i class="fa-solid fa-clock"></i> Time Left: --
@@ -46,15 +52,13 @@
             <div class="curr-score">
                 <i class="fa-solid fa-star"></i> Score: -
             </div>
-            <div class="high-score">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> High Score: -
-            </div>
-            <div class="higher-score">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Higher Score: -
-            </div>
             <div class="start-buttons">
                 <button id="start-reset">Start</button>
                 <button id="hard-mode">Hard Mode</button>
+            </div>
+            <div class="score-display-btns">
+                <button id="high-score-btn">High Scores</button>
+                <button id="higher-score-btn">Higher Scores</button>
             </div>
         </main>
     </body>
