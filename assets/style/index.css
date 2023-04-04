@@ -10,6 +10,7 @@ body {
     background-image: url("../image/gameBG.jpg");
     background-size: cover;
     padding-bottom: 20px;
+    overflow: hidden;
 }
 
 /* Instructions Dialog */
@@ -54,11 +55,69 @@ body {
 
 /* Scores Dialogs */
 #high-score-dlg {
+    color: #fff;
+    text-align: center;
+    margin: auto 0 auto auto;
+    padding: 30px;
+    height: 100%;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.3);
+    animation: 0.5s ease-in-out score-enter;
+}
 
+#high-score-dlg h3 {
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    margin-bottom: 20px;
+    animation: 1s ease-in-out score-enter;
+}
+
+.high-score-text {
+    margin: 15px auto;
+    color: #a6eca8;
+    display: flex;
+    justify-content: space-between;
+    translate: 300px 0;
+    animation: 1s 0.5s ease-in-out forwards score-enter;
 }
 
 #higher-score-dlg {
+    color: #fff;
+    text-align: center;
+    margin: auto 0 auto auto;
+    padding: 30px;
+    height: 100%;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.3);
+    animation: 0.5s ease-in-out score-enter;
+}
 
+#higher-score-dlg h3 {
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    margin-bottom: 20px;
+    animation: 1s ease-in-out score-enter;
+}
+
+.higher-score-text {
+    margin: 15px auto;
+    color: #a6eca8;
+    display: flex;
+    justify-content: space-between;
+    translate: 300px 0;
+    animation: 1s 0.5s ease-in-out forwards score-enter;
+}
+
+@keyframes score-enter {
+    from {
+        opacity: 0;
+        translate: 300px 0;
+    } to {
+        opacity: 1;
+        translate: 0px 0;
+    }
 }
 
 /* Header */
