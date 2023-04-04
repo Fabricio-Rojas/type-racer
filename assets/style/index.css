@@ -62,7 +62,6 @@ body {
     height: 100%;
     width: 300px;
     background-color: rgba(0, 0, 0, 0.3);
-    animation: 0.5s ease-in-out score-enter;
 }
 
 #high-score-dlg h3 {
@@ -79,7 +78,6 @@ body {
     display: flex;
     justify-content: space-between;
     translate: 300px 0;
-    animation: 1s 0.5s ease-in-out forwards score-enter;
 }
 
 #higher-score-dlg {
@@ -90,7 +88,6 @@ body {
     height: 100%;
     width: 300px;
     background-color: rgba(0, 0, 0, 0.3);
-    animation: 0.5s ease-in-out score-enter;
 }
 
 #higher-score-dlg h3 {
@@ -107,7 +104,14 @@ body {
     display: flex;
     justify-content: space-between;
     translate: 300px 0;
-    animation: 1s 0.5s ease-in-out forwards score-enter;
+}
+
+.enter-dialog {
+    animation: 0.5s ease-in-out forwards score-enter;
+}
+
+.exit-dialog {
+    animation: 0.5s ease-in-out forwards score-exit;
 }
 
 @keyframes score-enter {
@@ -118,6 +122,52 @@ body {
         opacity: 1;
         translate: 0px 0;
     }
+}
+
+@keyframes score-exit {
+    from {
+        opacity: 1;
+        translate: 0px 0;
+    } to {
+        opacity: 0;
+        translate: 300px 0;
+    }
+}
+
+/* Delete Scores Dialog */
+#scores-delete-dlg {
+    color: #fff;
+    text-align: center;
+    width: 610px;
+    height: 300px;
+    margin: auto;
+    padding: 50px 40px;
+    border-radius: 50px;
+    border: 3px solid #fff;
+    font-size: 25px;
+    background-color: #151423;
+    box-shadow: 0 0 500px rgba(0, 0, 0, 0.5);
+    animation: 0.25s linear instruct-enter;
+    overflow: hidden;
+}
+
+#scores-delete-dlg::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+#delete-all-btn {
+    text-align: center;
+    height: 40px;
+    width: 150px;
+    padding: 5px 10px;
+    margin: 20px 10px 0;
+    border-radius: 50px;
+    background-color: #d00000;
+    font-size: 17px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
 }
 
 /* Header */
@@ -188,7 +238,7 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.start-buttons {
+.buttons-row {
     margin-top: 30px;
     display: flex;
     justify-content: center;
@@ -200,7 +250,7 @@ button {
     width: 120px;
     padding: 5px 10px;
     margin: 0 10px;
-    border-radius: 5px;
+    border-radius: 50px;
     background-color: #D61092;
     font-size: 17px;
     color: #fff;
@@ -214,17 +264,11 @@ button {
     width: 120px;
     padding: 5px 10px;
     margin: 0 10px;
-    border-radius: 5px;
+    border-radius: 50px;
     background-color: #d00000;
     font-size: 17px;
     color: #fff;
     cursor: pointer;
-}
-
-.score-display-btns {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
 }
 
 #high-score-btn {
@@ -253,48 +297,35 @@ button {
     cursor: pointer;
 }
 
+#scores-delete-btn {
+    text-align: center;
+    height: 40px;
+    width: 150px;
+    padding: 5px 10px;
+    margin: 0 10px;
+    border-radius: 50px;
+    background-color: #800;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+}
+
 button:active {
     border: 1px solid #000;
 }
 
 /* JS activated */
 
-@keyframes rainbow {
-    0% { color: #ff0000; 
-        filter: hue-rotate(0deg) invert(0) saturate(1) blur(0px);
-    }
-    10% { color: #ff4000; 
-        filter: hue-rotate(36deg) invert(1) saturate(2) blur(1px);
-    }
-    20% { color: #ff8000; 
-        filter: hue-rotate(72deg) invert(0) saturate(3) blur(2px);
-    }
-    30% { color: #ffbf00; 
-        filter: hue-rotate(108deg) invert(1) saturate(4) blur(3px);
-    }
-    40% { color: #ffff00; 
-        filter: hue-rotate(144deg) invert(0) saturate(5) blur(4px);
-    }
-    50% { color: #80ff00; 
-        filter: hue-rotate(180deg) invert(1) saturate(6) blur(5px);
-    }
-    60% { color: #00ff00; 
-        filter: hue-rotate(216deg) invert(0) saturate(5) blur(4px);
-    }
-    70% { color: #00ff80; 
-        filter: hue-rotate(252deg) invert(1) saturate(4) blur(3px);
-    }
-    80% { color: #00ffff; 
-        filter: hue-rotate(288deg) invert(0) saturate(3) blur(2px);
-    }
-    90% { color: #0080ff; 
-        filter: hue-rotate(324deg) invert(1) saturate(2) blur(1px);
-    }
-    100% { color: #8000ff; 
-        filter: hue-rotate(360deg) invert(0) saturate(1) blur(0px);
-    }
+@keyframes bg-animation {
+    0% {background-position: left; filter: blur(0.5px);}
+    100% {background-position: right; filter: blur(6px);}
 }
 
 .hard-text {
-    animation: rainbow 0.5s linear infinite;
+    background: linear-gradient(90deg, #ff0000, #ff4000, #ff8000, #ffbf00, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #8000ff, #0080ff, #00ffff, #00ff80, #00ff00, #80ff00, #ffff00, #ffbf00, #ff8000, #ff4000, #ff0000, #ff4000, #ff8000, #ffbf00, #ffff00, #80ff00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 500% 500%;
+    color: transparent;
+    animation: bg-animation 0.4s linear infinite;
 }

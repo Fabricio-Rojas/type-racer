@@ -6,6 +6,7 @@ const body = document.querySelector('body');
 const instructionDlg = document.querySelector('#instructions-dlg');
 const highScoreDlg = document.querySelector('#high-score-dlg');
 const higherScoreDlg = document.querySelector('#higher-score-dlg');
+const deleteDlg = document.querySelector('#scores-delete-dlg');
 const title = document.querySelector('h2');
 const timer = document.querySelector('.timer');
 const currentWordDisplayed = document.querySelector('.curr-word');
@@ -15,6 +16,8 @@ const reStartBtn = document.querySelector('#start-reset');
 const hardModeBtn = document.querySelector('#hard-mode');
 const highScoreBtn = document.querySelector('#high-score-btn');
 const higherScoreBtn = document.querySelector('#higher-score-btn');
+const openDeleteDlgBtn = document.querySelector('#scores-delete-btn');
+const deleteScoresBtn = document.querySelector('#delete-all-btn');
 
 // Audio
 const BgMusic = new Audio('./assets/audio/BgMusic.mp3');
@@ -29,18 +32,14 @@ correctSound.volume = 0.3;
 
 // Class Definition
 class Score {
-    #date;
-    #score;
-    #percentage;
+    date;
+    score;
+    percentage;
     constructor(date, score, percentage) {
-        this.#date = date;
-        this.#score = score;
-        this.#percentage = percentage;
+        this.date = date;
+        this.score = score;
+        this.percentage = percentage;
     }
-
-    get date() {return this.#date}
-    get score() {return this.#score}
-    get percentage() {return this.#percentage}
 }
 
 /**
@@ -54,7 +53,7 @@ class Score {
  * intervalActive: boolean that makes sure if first time starting the game
  * wordCopy: a copy of the current mode's word list
  */
-let seconds = 5; // Modify to test
+let seconds = 99; // Modify to test turn back to 99
 let countdown;
 let score = 0;
 let highScoreList = JSON.parse(localStorage.getItem('highScores'));
@@ -66,7 +65,7 @@ let wordCopy;
 
 textInp.disabled = true;
 
-if(!highScoreList) {
+if (!highScoreList) {
     highScoreList = [];
 }
 if (!higherScoreList) {
@@ -80,23 +79,6 @@ if (!higherScoreList) {
 setTimeout(() => {
     instructionDlg.showModal();
 }, 500);
-
-body.onload = function() {
-    if (highScoreList.length > 0) {
-        highScoreDlg.innerHTML = '<h3>High Score</h3>';
-        createScoreText(highScoreList);
-    } else {
-        highScoreDlg.innerHTML = '<h3>High Score</h3>No scores yet';
-    }
-    if (higherScoreList.length > 0) {
-        higherScoreDlg.innerHTML = '<h3>Higher Score</h3>';
-        hardModeOn = true;
-        createScoreText(higherScoreList);
-        hardModeOn = false;
-    } else {
-        higherScoreDlg.innerHTML = '<h3>Higher Score</h3>No scores yet';
-    }
-}
 
 // Start an interval that counts down every second for x amount of seconds,
 // when seconds reach 0, stop the game, get the date, percentage of hits, and 
@@ -133,6 +115,7 @@ function startInterval() {
                 const scoreToText = JSON.stringify(highScoreList);
                 localStorage.setItem('highScores', scoreToText);
                 createScoreText(highScoreList);
+                highScoreDlg.classList.add('enter-dialog');
                 highScoreDlg.show();
             } else if (hardModeOn) {
                 higherScoreDlg.innerHTML = '<h3>Higher Score</h3>';
@@ -144,6 +127,7 @@ function startInterval() {
                 const scoreToText = JSON.stringify(higherScoreList);
                 localStorage.setItem('higherScores', scoreToText);
                 createScoreText(higherScoreList);
+                higherScoreDlg.classList.add('enter-dialog');
                 higherScoreDlg.show();
             }
             score = 0;
@@ -154,15 +138,21 @@ function startInterval() {
 }
 
 // Get objects from an array and create a div for each of them, add text and
-// add them to their respective dialog
+// add some anim style to then push them to their respective dialog
 function createScoreText(array) {
     array.forEach(object => {
         const newDiv = document.createElement('div');
+        let animDelay;
+        const delayBase = 0.4;
         if (!hardModeOn) {
             newDiv.classList.add('high-score-text');
+            animDelay = ((highScoreList.indexOf(object) + 1) * delayBase)
         } else {
             newDiv.classList.add('higher-score-text');
+            animDelay = ((higherScoreList.indexOf(object) + 1) * delayBase)
         }
+
+        newDiv.style.animation = `1s ${animDelay}s ease-in-out forwards score-enter`
 
         addScoreText(object, newDiv);
 
@@ -182,17 +172,17 @@ function addScoreText(object, div) {
     let p4 = document.createElement('p');
 
     if (!hardModeOn) {
-        p1.innerHTML = `#${highScoreList.indexOf(object) + 1}`;
+        p1.innerHTML = `<b>#${highScoreList.indexOf(object) + 1}</b>`;
     } else {
-        p1.innerHTML = `#${higherScoreList.indexOf(object) + 1}`;
+        p1.innerHTML = `<b>#${higherScoreList.indexOf(object) + 1}</b>`;
     }
-    p2.innerHTML = `${object.score} hits`;
     p3.innerHTML = `${object.percentage}%`;
+    p2.innerHTML = `<b>${object.score} hits</b>`;
     p4.innerHTML = `on ${object.date}`;
 
     div.appendChild(p1);
-    div.appendChild(p2);
     div.appendChild(p3);
+    div.appendChild(p2);
     div.appendChild(p4);
 }
 
@@ -237,7 +227,7 @@ reStartBtn.addEventListener('click', function() {
         startInterval();
         intervalActive = true;
     } else {
-        seconds = 99;
+        seconds = 99; // modify to test, turn back to 99
         resetInterval();
     }
 }, 1000);
@@ -297,42 +287,109 @@ hardModeBtn.addEventListener('click', function() {
         startInterval();
         intervalActive = true;
     } else {
-        seconds = 99;
+        seconds = 99; // modify to test, turn back to 99
         resetInterval();
     }
 }, 1000);
 })
 
-// Instruction Dialog closing function
+// Instruction Dialog closing function, closes score dialogs if you click
+// outside of them,  with a smooth animation
 body.addEventListener('click', function(e) {
     instructionDlg.close()
     if (!highScoreDlg.contains(e.target) && highScoreDlg.open) {
-        highScoreDlg.close();
+        highScoreDlg.classList.remove('enter-dialog');
+        highScoreDlg.classList.add('exit-dialog');
+        setTimeout(() => {
+            highScoreDlg.close();
+            highScoreDlg.classList.remove('exit-dialog');
+        }, 500);
         return;
     }
     if (!higherScoreDlg.contains(e.target) && higherScoreDlg.open) {
-        higherScoreDlg.close();
+        higherScoreDlg.classList.remove('enter-dialog');
+        higherScoreDlg.classList.add('exit-dialog');
+        setTimeout(() => {
+            higherScoreDlg.close();
+            higherScoreDlg.classList.remove('exit-dialog');
+        }, 500);
         return;
     }
 })
 
-// Display and close score dialog functions
+// Display and close score dialog functions, event (e) doesnt activate other 
+// event listeners. Update the scores array, recreate the dialog content
+// depending on the state of the array, also opens the selected dialog, and 
+// closes the other one with smooth animations
 highScoreBtn.addEventListener('click', function(e) {
     e.stopPropagation();
-    higherScoreDlg.close();
+    highScoreList = JSON.parse(localStorage.getItem('highScores'));
+    if (!highScoreList) {
+        highScoreList = [];
+    }
+    if (highScoreList.length > 0) {
+        highScoreDlg.innerHTML = '<h3>High Score</h3>';
+        createScoreText(highScoreList);
+    } else {
+        highScoreDlg.innerHTML = '<h3>High Score</h3>No scores yet';
+    }
+    highScoreDlg.classList.add('enter-dialog');
     highScoreDlg.show();
+    higherScoreDlg.classList.add('exit-dialog');
+    setTimeout(() => {
+        higherScoreDlg.close();
+        higherScoreDlg.classList.remove('exit-dialog');
+    }, 500);
 });
 
+// Same as previous function, but for this dialog
 higherScoreBtn.addEventListener('click', function(e) {
     e.stopPropagation();
-    highScoreDlg.close();
+    higherScoreList = JSON.parse(localStorage.getItem('higherScores'));
+    if (!higherScoreList) {
+        higherScoreList = [];
+    }
+    if (higherScoreList.length > 0) {
+        higherScoreDlg.innerHTML = '<h3>Higher Score</h3>';
+        hardModeOn = true;
+        createScoreText(higherScoreList);
+        hardModeOn = false;
+    } else {
+        higherScoreDlg.innerHTML = '<h3>Higher Score</h3>No scores yet';
+    }
+    higherScoreDlg.classList.add('enter-dialog');
     higherScoreDlg.show();
+    highScoreDlg.classList.add('exit-dialog');
+    setTimeout(() => {
+        highScoreDlg.close();
+        highScoreDlg.classList.remove('exit-dialog');
+    }, 500);
 });
 
+// Prevents accidental use of space in the game
 document.addEventListener('keydown', (e) => {
     if (e.key === ' ') {
         e.preventDefault();
     }
+})
+
+// Opens the delete scores dialog
+openDeleteDlgBtn.addEventListener('click', () => {
+    deleteDlg.showModal();
+})
+
+// Closese the delete scores dialog if clicked outside of itself
+deleteDlg.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    if (e.clientY < rect.top || e.clientY > rect.bottom || e.clientX < rect.left || e.clientX > rect.right) {
+        deleteDlg.close();
+    }
+})
+
+// Clears the localStorage, essentialy deleting the scores
+deleteScoresBtn.addEventListener('click', () => {
+    localStorage.clear();
+    deleteDlg.close();
 })
 
 // Word arrays
