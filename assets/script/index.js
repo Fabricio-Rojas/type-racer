@@ -131,8 +131,6 @@ function startInterval() {
                 higherScoreDlg.show();
             }
             score = 0;
-
-            hardModeBtn.style.display = 'block';
         }
     }, 1000);
 }
