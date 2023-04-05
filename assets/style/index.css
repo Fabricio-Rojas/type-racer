@@ -10,7 +10,7 @@ body {
     background-image: url("../image/gameBG.jpg");
     background-size: cover;
     padding-bottom: 20px;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 /* Instructions Dialog */
@@ -55,6 +55,7 @@ body {
 
 /* Scores Dialogs */
 #high-score-dlg {
+    position: fixed;
     color: #fff;
     text-align: center;
     margin: auto 0 auto auto;
@@ -81,6 +82,7 @@ body {
 }
 
 #higher-score-dlg {
+    position: fixed;
     color: #fff;
     text-align: center;
     margin: auto 0 auto auto;
@@ -182,8 +184,10 @@ h2 {
 /* Main */
 
 main {
-    height: calc(100vh - 170px);
+    height: 100vh;
+    max-width: 100vw;
     color: #fff;
+    position: relative;
 }
 
 /* Timer and Current word display */
