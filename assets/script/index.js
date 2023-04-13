@@ -329,7 +329,7 @@ highScoreBtn.addEventListener('click', function(e) {
         highScoreDlg.innerHTML = '<h3>High Score</h3>';
         createScoreText(highScoreList);
     } else {
-        highScoreDlg.innerHTML = '<h3>High Score</h3>No scores yet';
+        highScoreDlg.innerHTML = '<h3>High Score</h3><h3>No Scores yet</h3>';
     }
     highScoreDlg.classList.add('enter-dialog');
     highScoreDlg.show();
@@ -353,7 +353,7 @@ higherScoreBtn.addEventListener('click', function(e) {
         createScoreText(higherScoreList);
         hardModeOn = false;
     } else {
-        higherScoreDlg.innerHTML = '<h3>Higher Score</h3>No scores yet';
+        higherScoreDlg.innerHTML = '<h3>Higher Score</h3><h3>No Scores yet</h3>';
     }
     higherScoreDlg.classList.add('enter-dialog');
     higherScoreDlg.show();

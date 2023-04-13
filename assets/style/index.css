@@ -27,6 +27,7 @@ body {
     background: linear-gradient(315deg, #D61092, #271092);
     box-shadow: 0 0 500px rgba(0, 0, 0, 0.5);
     animation: 0.25s linear instruct-enter;
+    overflow: hidden;
 }
 
 #instructions-dlg::backdrop {
